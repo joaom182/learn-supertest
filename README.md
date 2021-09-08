@@ -4,6 +4,28 @@
 yarn add supertest -D
 ```
 
+# Bootstrapping the app
+
+app.ts
+```typescript
+import express, { Request, Response } from 'express';
+import 'dotenv/config';
+
+const app = express();
+app.use(express.json());
+app.get('/api/test/:id', (req, res) => { res.send({ ok: req.params.id }) });
+
+export { app };
+```
+
+server.ts
+```typescript
+import { app } from './app';
+const PORT = process.env.PORT || 7004;
+
+app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
+```
+
 # Testing
 
 ```typescript
